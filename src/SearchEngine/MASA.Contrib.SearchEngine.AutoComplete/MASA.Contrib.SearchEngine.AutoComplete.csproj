@@ -6,14 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-
     <ItemGroup>
+      <PackageReference Include="MASA.BuildingBlocks.SearchEngine.AutoComplete" Version="0.0.1727734149" />
+      <PackageReference Include="MASA.Utils.Data.Elasticsearch" Version="0.0.1727115468" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     </ItemGroup>
 
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\..\..\..\MASA.BuildingBlocks\feature\autocomplete-github\src\SearchEngine\MASA.BuildingBlocks.SearchEngine.AutoComplete\MASA.BuildingBlocks.SearchEngine.AutoComplete.csproj" />
-      <ProjectReference Include="..\..\..\..\..\..\MASA.Utils\feature\es\src\Data\MASA.Utils.Data.Elasticsearch\MASA.Utils.Data.Elasticsearch.csproj" />
-    </ItemGroup>
 </Project>
