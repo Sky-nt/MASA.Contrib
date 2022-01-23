@@ -1,0 +1,54 @@
+namespace MASA.Contrib.SearchEngine.AutoComplete.Options;
+
+public class AutoCompleteOptions<TDocument, TValue>
+    where TDocument : AutoCompleteDocument<TValue>
+{
+    internal string IndexName { get; private set; }
+
+    internal string? Alias { get; private set; }
+
+    internal bool IsDefault { get; private set; }
+
+    internal Action<TypeMappingDescriptor<TDocument>>? Action { get; private set; }
+
+    internal Action<IIndexSettings>? IndexSettingAction { get; private set; }
+
+    public AutoCompleteOptions<TDocument, TValue> UseIndexName(string indexName)
+    {
+        IndexName = indexName;
+        return this;
+    }
+
+    /// <summary>
+    /// Set index alias
+    /// </summary>
+    /// <param name="alias">When it is null, no alias is set</param>
+    /// <returns></returns>
+    public AutoCompleteOptions<TDocument, TValue> UseAlias(string alias)
+    {
+        Alias = alias;
+        return this;
+    }
+
+    /// <summary>
+    /// Set the default AutoComplete
+    /// </summary>
+    /// <returns></returns>
+    public AutoCompleteOptions<TDocument, TValue> UseDefault()
+    {
+        IsDefault = true;
+        return this;
+    }
+
+    public AutoCompleteOptions<TDocument, TValue> Mapping(Action<TypeMappingDescriptor<TDocument>> action)
+    {
+        Action = action;
+        return this;
+    }
+
+    public AutoCompleteOptions<TDocument, TValue> IndexSettings(Action<IIndexSettings> indexSettingAction)
+    {
+        IndexSettingAction = indexSettingAction;
+        return this;
+    }
+}
