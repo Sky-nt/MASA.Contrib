@@ -33,7 +33,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IIntegrationEventBus, IntegrationEventBus>();
         services.AddScoped<IIntegrationEventLogService, TIntegrationEventLogService>();
 
-        if (!services.Any(service => service.ServiceType == typeof(IUnitOfWork)))
+        if (services.All(service => service.ServiceType != typeof(IUnitOfWork)))
         {
             var logger = services.BuildServiceProvider().GetRequiredService<ILogger<IntegrationEventBus>>();
             logger.LogWarning("UoW is not enabled, local messages will not be integrated");

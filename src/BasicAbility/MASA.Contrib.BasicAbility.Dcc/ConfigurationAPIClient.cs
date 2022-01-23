@@ -99,13 +99,13 @@ public class ConfigurationAPIClient : ConfigurationAPIBase, IConfigurationAPICli
         var raw = await _client.GetAsync<string>(key, (value) =>
         {
             var result = FormatRaw(value);
-            valueChanged?.Invoke(result.Raw);
+            valueChanged.Invoke(result.Raw);
         });
 
         return FormatRaw(raw);
     }
 
-    private (string Raw, ConfigurationTypes ConfigurationType) FormatRaw(string raw)
+    private (string Raw, ConfigurationTypes ConfigurationType) FormatRaw(string? raw)
     {
         if (raw == null)
             throw new ArgumentException("configObject invalid");
