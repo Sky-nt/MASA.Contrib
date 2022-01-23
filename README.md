@@ -94,7 +94,7 @@ Realize cross-process events based on Dapr。[Usage introduction](/src/Dispatche
 > Advantage：
 >
 > 1. CQRS
-> 2. Field Service
+> 2. Domain Service
 > 3. Support domain events (in-process), integrated domain events (cross-process)
 > 4. Support the unified sending of field events after being pushed onto the stack
 
@@ -118,12 +118,14 @@ Install-Package MASA.Contrib.Data.Contracts.EF
 ```
 
 ```C#
-builder.Services
-    .AddUoW<CustomDbContext>(dbOptions =>
+builder.Services.AddEventBus(options => {
+    options.UseUoW<CustomDbContext>(dbOptions =>
     {
         dbOptions.UseSqlServer("server=localhost;uid=sa;pwd=P@ssw0rd;database=identity");
-        dbOptions.UseSoftDelete(builder.Services);//Start soft delete
-    })
+        dbOptions.UseSoftDelete(builder.Services);
+    });
+});
+
 ```
 
 > When the entity inherits ISoftware and is deleted, change the delete state to the modified state, and cooperate with the custom Remove operation to achieve soft deletion
